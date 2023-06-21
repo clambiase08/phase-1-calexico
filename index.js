@@ -1,18 +1,10 @@
+//Global variables
+const URL = 'http://localhost:3000/menu'
 
-
-function returnMenu(url) {
-    return fetch(url)
-    .then(res => res.json())
-}
-
-returnMenu('http://localhost:3000/menu')
-.then(menuArr => {
-    menuArr.forEach(renderMenu)
-    renderDish(menuArr[0])
-})
-
+// DOM Selectors
 const menuItems = document.querySelector("#menu-items")
 const dishDisplay = document.querySelector("#dish")
+
 const img = document.querySelector("#dish-image")
 const dishName = document.querySelector("#dish-name")
 const dishDescr = document.querySelector("#dish-description")
@@ -20,6 +12,22 @@ const dishPrice = document.querySelector("#dish-price")
 const cartForm = document.querySelector('#cart-form')
 const cartInput = document.querySelector('#cart-amount')
 let numInCart = document.querySelector('#number-in-cart')
+
+// Initializer
+returnMenu(URL)
+.then(menuArr => {
+    menuArr.forEach(renderMenu)
+    renderDish(menuArr[0])
+})
+
+
+// Fetch functions
+function returnMenu(url) {
+    return fetch(url)
+    .then(res => res.json())
+}
+
+// Render functions
 
 function renderMenu(menu) {
     const span = document.createElement('span')
@@ -37,6 +45,8 @@ function renderDish(menu) {
     numInCart.textContent = menu.number_in_bag
 }
 
+//Event Listeners
+
 //This is the part I need to really focus on!
 
 cartForm.addEventListener('submit', (e) => {
@@ -45,4 +55,3 @@ cartForm.addEventListener('submit', (e) => {
     numInCart.textContent = parseInt(numInCart.textContent) + newCart
     e.target.reset()
 })
-
