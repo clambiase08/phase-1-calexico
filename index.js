@@ -17,6 +17,12 @@
 //[x] write a function that renders the menu item on the page by setting the HTML elements equal to the keys.values from the server
 //[x] add to the .then on the returnMenu function that renders the first dish by calling renderdish and passing in the menuArr with a [0] to locate as first in the array
 
+//Challenge #3
+//When the user clicks on the menu items on the left, they should see all the details for that specific menu item.
+
+//Then I need to:
+//[x] add an event listener to the span that when you click, calls on renderDish and passes in the menu object
+
 
 function returnMenu(url) {
     return fetch(url)
@@ -41,6 +47,8 @@ function renderMenu(menu) {
     const span = document.createElement('span')
     span.textContent = menu.name
     menuItems.appendChild(span)
+    
+    span.addEventListener('click', () => renderDish(menu))
 }
 
 function renderDish(menu) {
