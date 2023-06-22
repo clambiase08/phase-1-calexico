@@ -1,5 +1,6 @@
 //Global variables
 const URL = 'http://localhost:3000/menu'
+let selectedItem;
 
 // DOM Selectors
 const menuItems = document.querySelector("#menu-items")
@@ -38,11 +39,13 @@ function renderMenu(menu) {
 }
 
 function renderDish(menu) {
+    selectedItem = menu
     img.src = menu.image
     dishName.textContent = menu.name
     dishDescr.textContent = menu.description
     dishPrice.textContent = menu.price
-    numInCart.textContent = menu.number_in_bag
+    numInCart.textContent = selectedItem.number_in_bag
+
 }
 
 //Event Listeners
@@ -54,4 +57,7 @@ cartForm.addEventListener('submit', (e) => {
     const newCart = parseInt(cartInput.value)
     numInCart.textContent = parseInt(numInCart.textContent) + newCart
     e.target.reset()
+
+    selectedItem.number_in_bag += newCart
 })
+
